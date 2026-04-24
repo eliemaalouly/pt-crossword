@@ -41,22 +41,19 @@ jobs:
         run: |
           ls -la "$HOME/.config/rmapi"
           test -f "$HOME/.config/rmapi/rmapi.conf"
-      
-      - name: Set up Go
-        uses: actions/setup-go@v5
-        with:
-          go-version: '1.22'
 
-      - name: Build rmapi from source
+      - name: Install rmapi
         run: |
-          git clone https://github.com/ddvk/rmapi
-          cd rmapi
-          go install
+          curl -L -o /tmp/rmapi.tar.gz \
+            "https://github.com/ddvk/rmapi/releases/download/v0.0.32/rmapi-linux-amd64.tar.gz"
+          tar xzf /tmp/rmapi.tar.gz -C /tmp
+          sudo mv /tmp/rmapi /usr/local/bin/rmapi
           rmapi version
       
       - name: Test rmapi upload
+        env:
+          RMAPI_FORCE_SCHEMA_VERSION: 4
         run: |
-          rmapi ls /
           rmapi put --force daily_crossword.pdf /
 
       - name: Commit PDF
