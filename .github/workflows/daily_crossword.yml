@@ -42,6 +42,14 @@ jobs:
           ls -la "$HOME/.config/rmapi"
           test -f "$HOME/.config/rmapi/rmapi.conf"
 
+      - name: Install rmapi
+        run: |
+          curl -L -o /tmp/rmapi.tar.gz \
+            "https://github.com/ddvk/rmapi/releases/latest/download/rmapi_linux_amd64.tar.gz"
+          tar xzf /tmp/rmapi.tar.gz -C /tmp
+          sudo mv /tmp/rmapi /usr/local/bin/rmapi
+          rmapi --version
+
       - name: Commit PDF
         run: |
           git config --global user.name "${{ github.actor }}"
