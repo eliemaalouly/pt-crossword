@@ -48,7 +48,7 @@ jobs:
             "https://github.com/ddvk/rmapi/releases/download/v0.0.32/rmapi-linux-amd64.tar.gz"
           tar xzf /tmp/rmapi.tar.gz -C /tmp
           sudo mv /tmp/rmapi /usr/local/bin/rmapi
-          rmapi --version
+          rmapi version
 
       - name: Commit PDF
         run: |
