@@ -37,7 +37,7 @@ with sync_playwright() as p:
 
     page.goto(printable_url, wait_until="networkidle")
     page.pdf(
-        path="latest.pdf",
+        path="daily_crossword.pdf",
         width="6.21in",
         height="8.28in",
         print_background=True,
