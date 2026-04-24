@@ -49,11 +49,6 @@ jobs:
           tar xzf /tmp/rmapi.tar.gz -C /tmp
           sudo mv /tmp/rmapi /usr/local/bin/rmapi
           rmapi version
-      
-      - name: Test rmapi upload
-        run: |
-          rmapi ls /
-          rmapi put daily_crossword.pdf --force /
 
       - name: Commit PDF
         run: |
@@ -62,3 +57,8 @@ jobs:
           git add daily_crossword.pdf
           git diff --cached --quiet || git commit -m "Update daily PDF"
           git push
+
+      - name: Test rmapi upload
+        run: |
+          rmapi ls /
+          rmapi put daily_crossword.pdf --force /
