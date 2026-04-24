@@ -29,6 +29,19 @@ jobs:
       - name: Run generator
         run: python daily_crossword.py
 
+      - name: Recreate rmapi config
+        run: |
+          mkdir -p "$HOME/.config/rmapi"
+          cat > "$HOME/.config/rmapi/rmapi.conf" <<'EOF'
+          ${{ secrets.RMAPI_CONFIG }}
+          EOF
+          chmod 600 "$HOME/.config/rmapi/rmapi.conf"
+
+      - name: Verify rmapi config exists
+        run: |
+          ls -la "$HOME/.config/rmapi"
+          test -f "$HOME/.config/rmapi/rmapi.conf"
+
       - name: Commit PDF
         run: |
           git config --global user.name "${{ github.actor }}"
