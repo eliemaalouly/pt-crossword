@@ -49,10 +49,9 @@ jobs:
 
       - name: Build rmapi from source
         run: |
-          git clone https://github.com/ddvk/rmapi.git /tmp/rmapi-src
-          cd /tmp/rmapi-src
-          go build -o rmapi
-          sudo mv rmapi /usr/local/bin/rmapi
+          git clone https://github.com/ddvk/rmapi
+          cd rmapi
+          go install
           rmapi version
       
       - name: Test rmapi upload
