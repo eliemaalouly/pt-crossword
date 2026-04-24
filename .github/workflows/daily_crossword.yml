@@ -41,13 +41,18 @@ jobs:
         run: |
           ls -la "$HOME/.config/rmapi"
           test -f "$HOME/.config/rmapi/rmapi.conf"
+      
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
 
-      - name: Install rmapi
+      - name: Build rmapi from source
         run: |
-          curl -L -o /tmp/rmapi.tar.gz \
-            "https://github.com/ddvk/rmapi/releases/download/v0.0.32/rmapi-linux-amd64.tar.gz"
-          tar xzf /tmp/rmapi.tar.gz -C /tmp
-          sudo mv /tmp/rmapi /usr/local/bin/rmapi
+          git clone https://github.com/ddvk/rmapi.git /tmp/rmapi-src
+          cd /tmp/rmapi-src
+          go build -o rmapi
+          sudo mv rmapi /usr/local/bin/rmapi
           rmapi version
       
       - name: Test rmapi upload
