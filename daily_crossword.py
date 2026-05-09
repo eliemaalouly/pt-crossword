@@ -2,7 +2,7 @@ from playwright.sync_api import sync_playwright
 
 URL = "https://www.linguno.com/crosswords/?lang=por&dialect=1"
 SECTION_TITLE = "Level"  # Level, Monolingual, Theme
-BUTTON_INDEX = 1   # 0 = A1, 1 = A2, 2 = B1, 3 = B2, etc.
+BUTTON_INDEX = 0   # 0 = A1, 1 = A2, 2 = B1, 3 = B2, etc.
 
 section_title_selector = f'div.section_title_container div.small_section_title:has-text("{SECTION_TITLE} crosswords")'
 button_selector = 'a.crossword_list_box[href*="/crossword/"]'
